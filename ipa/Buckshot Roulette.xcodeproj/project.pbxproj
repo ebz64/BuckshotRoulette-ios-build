@@ -51,7 +51,7 @@
 D0BCFE4518AEBDA2004A0001 /* DE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = DE; path = DE.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 D0BCFE4518AEBDA2004A0002 /* EE */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = EE; path = EE.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 D0BCFE4518AEBDA2004A0003 /* EN */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = EN; path = EN.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-D0BCFE4518AEBDA2004A0004 /* ES LATAM */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ES LATAM"; path = ES LATAM.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+D0BCFE4518AEBDA2004A0004 /* ES LATAM */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ES LATAM"; path = "ES LATAM.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 D0BCFE4518AEBDA2004A0005 /* ES */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ES; path = ES.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 D0BCFE4518AEBDA2004A0006 /* FR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = FR; path = FR.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 D0BCFE4518AEBDA2004A0007 /* IT */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = IT; path = IT.lproj/InfoPlist.strings; sourceTree = "<group>"; };
