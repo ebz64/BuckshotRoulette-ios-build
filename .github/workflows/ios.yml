@@ -9,11 +9,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Reconstruct large files
         run: |
           set -euxo pipefail
+
+          mkdir -p "ipa/Buckshot Roulette.xcframework/ios-arm64"
 
           cat chunks/pck_* > "ipa/Buckshot Roulette.pck"
           cat chunks/libgodot_* > "ipa/Buckshot Roulette.xcframework/ios-arm64/libgodot.a"
@@ -76,3 +78,4 @@ jobs:
         with:
           name: Buckshot-Roulette-iOS
           path: Buckshot-Roulette-iOS.ipa
+          if-no-files-found: error
