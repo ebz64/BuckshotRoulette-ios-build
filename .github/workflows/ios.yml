@@ -1,0 +1,78 @@
+name: Build Buckshot Roulette iOS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Reconstruct large files
+        run: |
+          set -euxo pipefail
+
+          cat chunks/pck_* > "ipa/Buckshot Roulette.pck"
+          cat chunks/libgodot_* > "ipa/Buckshot Roulette.xcframework/ios-arm64/libgodot.a"
+
+          ls -lh "ipa/Buckshot Roulette.pck"
+          ls -lh "ipa/Buckshot Roulette.xcframework/ios-arm64/libgodot.a"
+
+      - name: Show Xcode version
+        run: |
+          xcodebuild -version
+          xcode-select -p
+
+      - name: Build iOS app
+        run: |
+          set -euxo pipefail
+
+          rm -rf build DerivedData
+
+          xcodebuild \
+            -project "ipa/Buckshot Roulette.xcodeproj" \
+            -target "Buckshot Roulette" \
+            -sdk iphoneos \
+            -configuration Release \
+            -derivedDataPath "$GITHUB_WORKSPACE/DerivedData" \
+            CONFIGURATION_BUILD_DIR="$GITHUB_WORKSPACE/build" \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY=""
+
+      - name: Find application
+        run: |
+          set -euxo pipefail
+
+          find build -maxdepth 2 -type d -name "*.app" -print
+
+          APP=$(find build -maxdepth 2 -type d -name "*.app" | head -1)
+
+          if [ -z "$APP" ]; then
+            echo "ERROR: .app не найден"
+            exit 1
+          fi
+
+          echo "APP=$APP" >> "$GITHUB_ENV"
+
+      - name: Create IPA
+        run: |
+          set -euxo pipefail
+
+          rm -rf Payload
+          mkdir Payload
+
+          cp -R "$APP" "Payload/Buckshot Roulette.app"
+
+          zip -qry "Buckshot-Roulette-iOS.ipa" Payload
+
+          ls -lh "Buckshot-Roulette-iOS.ipa"
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: Buckshot-Roulette-iOS
+          path: Buckshot-Roulette-iOS.ipa
