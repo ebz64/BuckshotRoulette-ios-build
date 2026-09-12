@@ -36,7 +36,7 @@ jobs:
 
           xcodebuild \
             -project "ipa/Buckshot Roulette.xcodeproj" \
-            -target "Buckshot Roulette" \
+            -scheme "Buckshot Roulette" \
             -sdk iphoneos \
             -configuration Release \
             -derivedDataPath "$GITHUB_WORKSPACE/DerivedData" \
@@ -78,4 +78,3 @@ jobs:
         with:
           name: Buckshot-Roulette-iOS
           path: Buckshot-Roulette-iOS.ipa
-          if-no-files-found: error
